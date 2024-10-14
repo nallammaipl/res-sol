@@ -23,13 +23,44 @@
         .flex-card {
             display: flex;
             flex-direction: column;
-            height: 450px;
+            height: 500px;
             width: 300px;
         }
     
         .flex-card .card-body {
             flex-grow: 1;
         }
+        .p{
+            font-size: 12px;
+        }
+        .card-footer{
+            padding-top: 10px;
+        }
+        .card same-height-card flex-card{
+            padding-bottom: 50%;
+        }
+        .col-md-6 col-lg-4{
+            padding-inline: 50%;
+        }
+        /* Make the row container a flexbox */
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between; /* Ensures space between items */
+        }
+        
+        .card {
+            flex: 0 0 calc(33.33% - 20px); /* Adjusts card width to fill one-third of the row, accounting for gap */
+            margin-bottom: 20px; /* Space between rows */
+        }
+        
+       
+        
+        .card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+            transform: scale(1.02); /* Slightly scale up the card */
+        }
+
     </style>
 </head>
 <body>
@@ -54,19 +85,19 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="nav nav-pills">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">All</a>
+                            <a class="nav-link" href="#" data-category="all">All</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Mains</a>
+                            <a class="nav-link" href="#" data-category="mains">Mains</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Starters</a>
+                            <a class="nav-link" href="#" data-category="starters">Starters</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Desserts</a>
+                            <a class="nav-link" href="#" data-category="desserts">Desserts</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Beverages</a>
+                            <a class="nav-link" href="#" data-category="beverages">Beverages</a>
                         </li>
                     </ul>
                 </div>
@@ -78,33 +109,254 @@
     <div class="container mt-4">
         <div class="row">
             <!-- Card 1 -->
-            <div class="col-md-6 col-lg-4">
-                <div class="card flex-card">
+            <div class="col-md-6 col-lg-4" data-category="starters">
+                <div class="card same-height-card flex-card">
                     <img src="https://images.pexels.com/photos/1731535/pexels-photo-1731535.jpeg?auto=compress&cs=tinysrgb&w=400" class="card-img-top" alt="Soup of the day">
                     <div class="card-body">
                         <h5 class="card-title">Soup of the day</h5>
                         <p class="card-text">Category: Starters</p>
-                        <p class="card-text" style="font-size: 11px;">Freshly made soup with seasonal ingredients</p>
+                        <p class="card-text">Freshly made soup with seasonal ingredients.</p>
                         <p class="card-text"><strong>Price: $5</strong></p>
+                    </div>
+                    <div class="card-footer">
                         <a href="#" class="btn btn-primary">Order Now</a>
                     </div>
                 </div>
             </div>
             <!-- Card 2 -->
-            <div class="col-md-6 col-lg-4">
-                <div class="card flex-card">
+            <div class="col-md-6 col-lg-4" data-category="starters">
+                <div class="card same-height-card flex-card">
                     <img src="https://www.allrecipes.com/thmb/kt9t899s87rKleitZiaUwWOoNJI=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/3605381-b506207e5f494e44a7cf5c1bbe488748.jpg" class="card-img-top" alt="Bruschetta">
                     <div class="card-body">
                         <h5 class="card-title">Bruschetta</h5>
                         <p class="card-text">Category: Starters</p>
-                        <p class="card-text" style="font-size: 11px;">Grilled bread rubbed with garlic and topped with diced tomatoes, fresh basil, and mozzarella</p>
+                        <p class="card-text">Grilled bread rubbed with garlic and topped with diced tomatoes, fresh basil, and mozzarella.</p>
                         <p class="card-text"><strong>Price: $7</strong></p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn btn-primary">Order Now</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 3 -->
+            <div class="col-md-6 col-lg-4" data-category="mains">
+                <div class="card same-height-card flex-card">
+                    <img src="https://media.gettyimages.com/id/1358831517/photo/crispy-chicken-parmesan.jpg?s=612x612&w=0&k=20&c=izCK6IforZt1WU1f467NXB-PPR0TAfEw0aoJ6d8imB0=" class="card-img-top" alt="Chicken Parmesan">
+                    <div class="card-body">
+                        <h5 class="card-title">Chicken Parmesan</h5>
+                        <p class="card-text">Category: Mains</p>
+                        <p class="card-text">Crispy chicken topped with tomato sauce and mozzarella, served with spaghetti.</p>
+                        <p class="card-text"><strong>Price: $12</strong></p>
+                    </div>
+                    <div class="card-footer">
                         <a href="#" class="btn btn-primary">Order Now</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <div class="container mt-4">
+        <div class="row">
+            <!-- Card 4 -->
+            <div class="col-md-6 col-lg-4" data-category="mains">
+                <div class="card same-height-card flex-card">
+                    <img src="https://media.gettyimages.com/id/463889403/photo/rib-eye-steak.jpg?s=612x612&w=0&k=20&c=igQuEqd2hEwHnwIcuMbiUnQRm5T9Mwk1ASFanAq6iOk=" class="card-img-top" alt="Steak Frites">
+                    <div class="card-body">
+                        <h5 class="card-title">Steak Frites</h5>
+                        <p class="card-text">Category: Mains</p>
+                        <p class="card-text">Grilled steak served with french fries and salad.</p>
+                        <p class="card-text"><strong>Price: $18</strong></p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn btn-primary">Order Now</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 5 -->
+            <div class="col-md-6 col-lg-4" data-category="desserts">
+                <div class="card same-height-card flex-card">
+                    <img src="https://media.istockphoto.com/id/544716244/photo/warm-chocolate-lava-cake-with-molten-center-and-red-currants.webp?b=1&s=170667a&w=0&k=20&c=6NPIcP8XUG4WwbJU-qfLOEP07aU79doAIsqZ8wic478=" class="card-img-top" alt="Chocolate Lava Cake">
+                    <div class="card-body">
+                        <h5 class="card-title">Chocolate Lava Cake</h5>
+                        <p class="card-text">Category: Desserts</p>
+                        <p class="card-text">Warm chocolate cake with a gooey molten chocolate center, served with vanilla ice cream.</p>
+                        <p class="card-text"><strong>Price: $8</strong></p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn btn-primary">Order Now</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 6 -->
+            <div class="col-md-6 col-lg-4" data-category="desserts">
+                <div class="card same-height-card flex-card">
+                    <img src="https://plus.unsplash.com/premium_photo-1666353535417-c86616951727?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YXBwbGUlMjBwaWV8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="Apple Pie">
+                    <div class="card-body">
+                        <h5 class="card-title">Apple Pie</h5>
+                        <p class="card-text">Category: Desserts</p>
+                        <p class="card-text">Classic apple pie with a flaky crust, served with whipped cream.</p>
+                        <p class="card-text"><strong>Price: $6</strong></p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn btn-primary">Order Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-4">
+        <div class="row">
+            <!-- Card 7 -->
+            <div class="col-md-6 col-lg-4" data-category="mains">
+                <div class="card same-height-card flex-card">
+                    <img src="https://plus.unsplash.com/premium_photo-1664648063589-76b97669bc29?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dmVnYW4lMjBidXJnZXJ8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="Vegan Burger">
+                    <div class="card-body">
+                        <h5 class="card-title">Vegan Burger</h5>
+                        <p class="card-text">Category: Mains</p>
+                        <p class="card-text">Plant-based burger served with fries.</p>
+                        <p class="card-text"><strong>Price: $10</strong></p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn btn-primary">Order Now</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 8 -->
+            <div class="col-md-6 col-lg-4" data-category="starters">
+                <div class="card same-height-card flex-card">
+                    <img src="https://images.unsplash.com/photo-1550304943-4f24f54ddde9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2Vhc2FyJTIwc2FsYWR8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="Caesar Salad">
+                    <div class="card-body">
+                        <h5 class="card-title">Caesar Salad</h5>
+                        <p class="card-text">Category: Starters</p>
+                        <p class="card-text">Fresh romaine lettuce with Caesar dressing, parmesan, and croutons.</p>
+                        <p class="card-text"><strong>Price: $6</strong></p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn btn-primary">Order Now</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 9 -->
+            <div class="col-md-6 col-lg-4" data-category="mains">
+                <div class="card same-height-card flex-card">
+                    <img src="https://images.unsplash.com/photo-1600803907087-f56d462fd26b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fHNwYWdoZXR0aSUyMGNhcmJvbmFyYXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="Spaghetti Carbonara">
+                    <div class="card-body">
+                        <h5 class="card-title">Spaghetti Carbonara</h5>
+                        <p class="card-text">Category: Mains</p>
+                        <p class="card-text">Classic carbonara with pancetta, egg, hard cheese, and pepper.</p>
+                        <p class="card-text"><strong>Price: $14</strong></p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn btn-primary">Order Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-4">
+        <div class="row">
+            <!-- Card 10 -->
+            <div class="col-md-6 col-lg-4" data-category="desserts">
+                <div class="card same-height-card flex-card">
+                    <img src="https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dGlyYW1pc3V8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="Tiramisu">
+                    <div class="card-body">
+                        <h5 class="card-title">Tiramisu</h5>
+                        <p class="card-text">Category: Desserts</p>
+                        <p class="card-text">Italian dessert made of savoiardi dipped in coffee, layered with a whipped mixture of eggs, sugar, and mascarpone cheese.</p>
+                        <p class="card-text"><strong>Price: $7</strong></p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn btn-primary">Order Now</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 11 -->
+            <div class="col-md-6 col-lg-4" data-category="beverages">
+                <div class="card same-height-card flex-card">
+                    <img src="https://media.istockphoto.com/id/170428990/photo/iced-mocha.webp?b=1&s=170667a&w=0&k=20&c=ItUVpbetBvrKaKcJySbepwehwa2JIJjSOqzHulpvJY0=" class="card-img-top" alt="Iced Coffee">
+                    <div class="card-body">
+                        <h5 class="card-title">Iced Coffee</h5>
+                        <p class="card-text">Category: Beverages</p>
+                        <p class="card-text">Chilled coffee served with ice and cream.</p>
+                        <p class="card-text"><strong>Price: $4</strong></p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn btn-primary">Order Now</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 12 -->
+            <div class="col-md-6 col-lg-4" data-category="beverages">
+                <div class="card same-height-card flex-card">
+                    <img src="https://media.istockphoto.com/id/1217751214/photo/fresh-mango-lassi-and-mango-fruit.webp?b=1&s=170667a&w=0&k=20&c=Jt0J70BwVkGdirVAu78hKb-MiMzN3_GUbCz8SmGUdS8=" class="card-img-top" alt="Mango Lassi">
+                    <div class="card-body">
+                        <h5 class="card-title">Mango Lassi</h5>
+                        <p class="card-text">Category: Beverages</p>
+                        <p class="card-text">Refreshing Indian drink made with mango and yogurt.</p>
+                        <p class="card-text"><strong>Price: $5</strong></p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn btn-primary">Order Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-4">
+        <div class="row">
+            <!-- Card 13 -->
+            <div class="col-md-6 col-lg-4" data-category="beverages">
+                <div class="card same-height-card flex-card">
+                    <img src="https://images.unsplash.com/photo-1627435601361-ec25f5b1d0e5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Z3JlZW4lMjB0ZWF8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="Green Tea">
+                    <div class="card-body">
+                        <h5 class="card-title">Green Tea</h5>
+                        <p class="card-text">Category: Beverages</p>
+                        <p class="card-text">Traditional green tea with antioxidants.</p>
+                        <p class="card-text"><strong>Price: $3</strong></p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn btn-primary">Order Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Function to filter cards
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault(); // Prevent the default link behavior
+                const category = this.getAttribute('data-category');
+    
+                // Remove 'active' class from all links
+                document.querySelectorAll('.nav-link').forEach(nav => nav.classList.remove('active'));
+                // Add 'active' class to the clicked link
+                this.classList.add('active');
+    
+                // Show/Hide cards based on the selected category
+                document.querySelectorAll('.col-md-6, .col-lg-4').forEach(card => {
+                    if (category === 'all' || card.getAttribute('data-category') === category) {
+                        card.style.display = 'block'; // Show card
+                    } else {
+                        card.style.display = 'none'; // Hide card
+                    }
+                });
+    
+                // Reset flexbox alignment after filtering
+                const row = document.querySelector('.row');
+                row.style.display = 'none'; // Temporarily hide
+                setTimeout(() => row.style.display = 'flex', 0); // Show again to reset alignment
+            });
+        });
+    </script>
+    
+    
+    
+    
+    
+    
+    
+
     
     
     
