@@ -12,9 +12,11 @@
         }
         h1{
             text-align: center;
+            font-family: cursive;
         }
         p{
             text-align: center;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
         }
         .card-img-top{
             width: 300px;
@@ -60,6 +62,15 @@
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
             transform: scale(1.02); /* Slightly scale up the card */
         }
+        .col-12{
+            padding-inline: 20px;
+        }
+        .col-md-6.col-lg-4 {
+            flex: 1 0 calc(33.33% - 20px); /* Adjust as needed for spacing */
+            box-sizing: border-box; /* Include padding and borders in width calculation */
+            margin-bottom: 20px;
+        }
+        
 
     </style>
 </head>
@@ -104,6 +115,15 @@
             </nav>
         </div>
     </div>
+    <!-- Search Bar -->
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <input type="text" id="searchInput" class="form-control" placeholder="Search for items...">
+            </div>
+        </div>
+    </div>
+
     <!--card img-->
     <!--card1-->
     <div class="container mt-4">
@@ -342,13 +362,31 @@
                     }
                 });
     
-                // Reset flexbox alignment after filtering
                 const row = document.querySelector('.row');
-                row.style.display = 'none'; // Temporarily hide
-                setTimeout(() => row.style.display = 'flex', 0); // Show again to reset alignment
+                row.style.display = 'flex'; // Ensure row is a flex container
+                row.style.flexWrap = 'wrap';
             });
         });
     </script>
+    <script>
+        // Function to search cards
+        document.getElementById('searchInput').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+    
+            // Get all the cards
+            document.querySelectorAll('.col-md-6, .col-lg-4').forEach(card => {
+                const title = card.querySelector('.card-title').textContent.toLowerCase();
+    
+                // Check if the title includes the search term
+                if (title.includes(searchTerm)) {
+                    card.style.display = 'block'; // Show the card
+                } else {
+                    card.style.display = 'none'; // Hide the card
+                }
+            });
+        });
+    </script>
+    
     
     
     
