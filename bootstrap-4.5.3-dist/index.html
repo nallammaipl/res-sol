@@ -8,15 +8,22 @@
     <link rel="stylesheet" href="css/style.css">
     <style>
         body{
-            background-color: bisque;
+            background: url('https://pointos.com/wp-content/uploads/2017/10/cropped-blur-background-of-pub-restaurant-with-wood-table-628137314_2125x1416.jpeg') no-repeat center center fixed;
         }
         h1{
             text-align: center;
             font-family: cursive;
+            color: #fff;
+        }
+        h3{
+            text-align: center;
+            font-family: cursive;
+            color: #fff;
         }
         p{
             text-align: center;
             font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            
         }
         .card-img-top{
             width: 300px;
@@ -27,6 +34,7 @@
             flex-direction: column;
             height: 500px;
             width: 300px;
+            grid-template-columns: 50px 1fr;
         }
     
         .flex-card .card-body {
@@ -65,11 +73,82 @@
         .col-12{
             padding-inline: 20px;
         }
-        .col-md-6.col-lg-4 {
-            flex: 1 0 calc(33.33% - 20px); /* Adjust as needed for spacing */
-            box-sizing: border-box; /* Include padding and borders in width calculation */
-            margin-bottom: 20px;
-        }
+        
+        /* Base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+.card-img-top {
+    width: 100%;
+    height: 200px; /* Set a fixed height for the card image */
+    object-fit: cover; /* Ensures the image covers the entire area without stretching */
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+}
+
+.navbar .navbar-brand {
+    color: #fff;
+    text-decoration: none;
+    font-size: 24px;
+}
+
+.navbar-nav {
+    list-style: none;
+    display: flex;
+}
+
+.nav-item {
+    margin-left: 20px;
+}
+
+.nav-link {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.navbar-toggler {
+    border: none;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .navbar-nav {
+        display: none; /* Hide links by default */
+        flex-direction: column; /* Stack links vertically */
+        width: 100%;
+        background-color: #333;
+        position: absolute;
+        top: 60px; /* Position below the navbar */
+        left: 0;
+    }
+
+    .navbar-nav.active {
+        display: flex; /* Show links when active */
+    }
+
+    .nav-item {
+        margin: 10px 0; /* Space between items */
+        text-align: center; /* Center align text */
+    }
+
+    .navbar-toggler {
+        display: block; /* Show the toggle button */
+    }
+}
+        
+
         
 
     </style>
@@ -79,46 +158,33 @@
     <!--header-->
     <div class="boxed-header" >
         <h1>My Awesome Page!!</h1>
-            <p>Feel your taste buds</p>
+        <h3>Feel your taste buds</h3> 
     </div>
     <!--navbar-->
     <div class="container-fluid">
         <div class="container mt-3">
-            <!-- Navbar -->
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <!-- Navbar brand (optional) -->
-                <a class="navbar-brand" href="#">Menu</a>
-                <!-- Toggler/collapsible Button -->
+            <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+                
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <!-- Navbar links -->
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="nav nav-pills">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-category="all">All</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-category="mains">Mains</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-category="starters">Starters</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-category="desserts">Desserts</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-category="beverages">Beverages</a>
-                        </li>
+                        <li class="nav-item"><a class="nav-link" href="#" data-category="all">All</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#" data-category="mains">Mains</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#" data-category="starters">Starters</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#" data-category="desserts">Desserts</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#" data-category="beverages">Beverages</a></li>
                     </ul>
                 </div>
             </nav>
         </div>
     </div>
+
     <!-- Search Bar -->
     <div class="container mt-4">
         <div class="row">
-            <div class="col-12">
+            <div class="col-12 mb-4">
                 <input type="text" id="searchInput" class="form-control" placeholder="Search for items...">
             </div>
         </div>
@@ -126,12 +192,12 @@
 
     <!--card img-->
     <!--card1-->
-    <div class="container mt-4">
+    <div class="container-fluid">
         <div class="row">
             <!-- Card 1 -->
-            <div class="col-md-6 col-lg-4" data-category="starters">
-                <div class="card same-height-card flex-card">
-                    <img src="https://images.pexels.com/photos/1731535/pexels-photo-1731535.jpeg?auto=compress&cs=tinysrgb&w=400" class="card-img-top" alt="Soup of the day">
+            <div class="col-12 col-md-6 col-lg-4 mb-4" data-category="starters">
+                <div class="card h-100">
+                    <img src="https://images.pexels.com/photos/1731535/pexels-photo-1731535.jpeg?auto=compress&cs=tinysrgb&w=400" class="card-img-top img-fluid" alt="Soup of the day">
                     <div class="card-body">
                         <h5 class="card-title">Soup of the day</h5>
                         <p class="card-text">Category: Starters</p>
@@ -144,9 +210,9 @@
                 </div>
             </div>
             <!-- Card 2 -->
-            <div class="col-md-6 col-lg-4" data-category="starters">
-                <div class="card same-height-card flex-card">
-                    <img src="https://www.allrecipes.com/thmb/kt9t899s87rKleitZiaUwWOoNJI=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/3605381-b506207e5f494e44a7cf5c1bbe488748.jpg" class="card-img-top" alt="Bruschetta">
+            <div class="col-12 col-md-6 col-lg-4 mb-4" data-category="starters">
+                <div class="card h-100">
+                    <img src="https://www.allrecipes.com/thmb/kt9t899s87rKleitZiaUwWOoNJI=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/3605381-b506207e5f494e44a7cf5c1bbe488748.jpg" class="card-img-top img-fluid" alt="Bruschetta">
                     <div class="card-body">
                         <h5 class="card-title">Bruschetta</h5>
                         <p class="card-text">Category: Starters</p>
@@ -159,9 +225,9 @@
                 </div>
             </div>
             <!-- Card 3 -->
-            <div class="col-md-6 col-lg-4" data-category="mains">
-                <div class="card same-height-card flex-card">
-                    <img src="https://media.gettyimages.com/id/1358831517/photo/crispy-chicken-parmesan.jpg?s=612x612&w=0&k=20&c=izCK6IforZt1WU1f467NXB-PPR0TAfEw0aoJ6d8imB0=" class="card-img-top" alt="Chicken Parmesan">
+            <div class="col-12 col-md-6 col-lg-4 mb-4" data-category="mains">
+                <div class="card h-100">
+                    <img src="https://media.gettyimages.com/id/1358831517/photo/crispy-chicken-parmesan.jpg?s=612x612&w=0&k=20&c=izCK6IforZt1WU1f467NXB-PPR0TAfEw0aoJ6d8imB0=" class="card-img-top img-fluid" alt="Chicken Parmesan">
                     <div class="card-body">
                         <h5 class="card-title">Chicken Parmesan</h5>
                         <p class="card-text">Category: Mains</p>
@@ -173,14 +239,14 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="container mt-4">
-        <div class="row">
+        
+    
+    
+        
             <!-- Card 4 -->
-            <div class="col-md-6 col-lg-4" data-category="mains">
-                <div class="card same-height-card flex-card">
-                    <img src="https://media.gettyimages.com/id/463889403/photo/rib-eye-steak.jpg?s=612x612&w=0&k=20&c=igQuEqd2hEwHnwIcuMbiUnQRm5T9Mwk1ASFanAq6iOk=" class="card-img-top" alt="Steak Frites">
+            <div class="col-12 col-md-6 col-lg-4 mb-4" data-category="mains">
+                <div class="card h-100">
+                    <img src="https://media.gettyimages.com/id/463889403/photo/rib-eye-steak.jpg?s=612x612&w=0&k=20&c=igQuEqd2hEwHnwIcuMbiUnQRm5T9Mwk1ASFanAq6iOk=" class="card-img-top img-fluid" alt="Steak Frites">
                     <div class="card-body">
                         <h5 class="card-title">Steak Frites</h5>
                         <p class="card-text">Category: Mains</p>
@@ -193,9 +259,9 @@
                 </div>
             </div>
             <!-- Card 5 -->
-            <div class="col-md-6 col-lg-4" data-category="desserts">
-                <div class="card same-height-card flex-card">
-                    <img src="https://media.istockphoto.com/id/544716244/photo/warm-chocolate-lava-cake-with-molten-center-and-red-currants.webp?b=1&s=170667a&w=0&k=20&c=6NPIcP8XUG4WwbJU-qfLOEP07aU79doAIsqZ8wic478=" class="card-img-top" alt="Chocolate Lava Cake">
+            <div class="col-12 col-md-6 col-lg-4 mb-4" data-category="desserts">
+                <div class="card h-100">
+                    <img src="https://media.istockphoto.com/id/544716244/photo/warm-chocolate-lava-cake-with-molten-center-and-red-currants.webp?b=1&s=170667a&w=0&k=20&c=6NPIcP8XUG4WwbJU-qfLOEP07aU79doAIsqZ8wic478=" class="card-img-top img-fluid" alt="Chocolate Lava Cake">
                     <div class="card-body">
                         <h5 class="card-title">Chocolate Lava Cake</h5>
                         <p class="card-text">Category: Desserts</p>
@@ -208,9 +274,9 @@
                 </div>
             </div>
             <!-- Card 6 -->
-            <div class="col-md-6 col-lg-4" data-category="desserts">
-                <div class="card same-height-card flex-card">
-                    <img src="https://plus.unsplash.com/premium_photo-1666353535417-c86616951727?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YXBwbGUlMjBwaWV8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="Apple Pie">
+            <div class="col-12 col-md-6 col-lg-4 mb-4" data-categocard samry="desserts">
+                <div class="card h-100">
+                    <img src="https://plus.unsplash.com/premium_photo-1666353535417-c86616951727?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YXBwbGUlMjBwaWV8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60" class="card-img-top img-fluid" alt="Apple Pie">
                     <div class="card-body">
                         <h5 class="card-title">Apple Pie</h5>
                         <p class="card-text">Category: Desserts</p>
@@ -222,14 +288,14 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="container mt-4">
-        <div class="row">
+        
+    
+    
+        
             <!-- Card 7 -->
-            <div class="col-md-6 col-lg-4" data-category="mains">
-                <div class="card same-height-card flex-card">
-                    <img src="https://plus.unsplash.com/premium_photo-1664648063589-76b97669bc29?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dmVnYW4lMjBidXJnZXJ8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="Vegan Burger">
+            <div class="col-12 col-md-6 col-lg-4 mb-4" data-category="mains">
+                <div class="card h-100">
+                    <img src="https://plus.unsplash.com/premium_photo-1664648063589-76b97669bc29?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dmVnYW4lMjBidXJnZXJ8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60" class="card-img-top img-fluid" alt="Vegan Burger">
                     <div class="card-body">
                         <h5 class="card-title">Vegan Burger</h5>
                         <p class="card-text">Category: Mains</p>
@@ -242,9 +308,9 @@
                 </div>
             </div>
             <!-- Card 8 -->
-            <div class="col-md-6 col-lg-4" data-category="starters">
-                <div class="card same-height-card flex-card">
-                    <img src="https://images.unsplash.com/photo-1550304943-4f24f54ddde9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2Vhc2FyJTIwc2FsYWR8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="Caesar Salad">
+            <div class="col-12 col-md-6 col-lg-4 mb-4" data-category="starters">
+                <div class="card h-100">
+                    <img src="https://images.unsplash.com/photo-1550304943-4f24f54ddde9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2Vhc2FyJTIwc2FsYWR8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60" class="card-img-top img-fluid" alt="Caesar Salad">
                     <div class="card-body">
                         <h5 class="card-title">Caesar Salad</h5>
                         <p class="card-text">Category: Starters</p>
@@ -257,9 +323,9 @@
                 </div>
             </div>
             <!-- Card 9 -->
-            <div class="col-md-6 col-lg-4" data-category="mains">
-                <div class="card same-height-card flex-card">
-                    <img src="https://images.unsplash.com/photo-1600803907087-f56d462fd26b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fHNwYWdoZXR0aSUyMGNhcmJvbmFyYXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="Spaghetti Carbonara">
+            <div class="col-12 col-md-6 col-lg-4 mb-4" data-category="mains">
+                <div class="card h-100">
+                    <img src="https://images.unsplash.com/photo-1600803907087-f56d462fd26b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fHNwYWdoZXR0aSUyMGNhcmJvbmFyYXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" class="card-img-top img-fluid" alt="Spaghetti Carbonara">
                     <div class="card-body">
                         <h5 class="card-title">Spaghetti Carbonara</h5>
                         <p class="card-text">Category: Mains</p>
@@ -271,14 +337,14 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="container mt-4">
-        <div class="row">
+        
+    
+    
+        
             <!-- Card 10 -->
-            <div class="col-md-6 col-lg-4" data-category="desserts">
-                <div class="card same-height-card flex-card">
-                    <img src="https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dGlyYW1pc3V8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="Tiramisu">
+            <div class="col-12 col-md-6 col-lg-4 mb-4" data-category="desserts">
+                <div class="card h-100">
+                    <img src="https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dGlyYW1pc3V8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60" class="card-img-top img-fluid" alt="Tiramisu">
                     <div class="card-body">
                         <h5 class="card-title">Tiramisu</h5>
                         <p class="card-text">Category: Desserts</p>
@@ -291,9 +357,9 @@
                 </div>
             </div>
             <!-- Card 11 -->
-            <div class="col-md-6 col-lg-4" data-category="beverages">
-                <div class="card same-height-card flex-card">
-                    <img src="https://media.istockphoto.com/id/170428990/photo/iced-mocha.webp?b=1&s=170667a&w=0&k=20&c=ItUVpbetBvrKaKcJySbepwehwa2JIJjSOqzHulpvJY0=" class="card-img-top" alt="Iced Coffee">
+            <div class="col-12 col-md-6 col-lg-4 mb-4" data-category="beverages">
+                <div class="card h-100">
+                    <img src="https://media.istockphoto.com/id/170428990/photo/iced-mocha.webp?b=1&s=170667a&w=0&k=20&c=ItUVpbetBvrKaKcJySbepwehwa2JIJjSOqzHulpvJY0=" class="card-img-top img-fluid" alt="Iced Coffee">
                     <div class="card-body">
                         <h5 class="card-title">Iced Coffee</h5>
                         <p class="card-text">Category: Beverages</p>
@@ -306,9 +372,9 @@
                 </div>
             </div>
             <!-- Card 12 -->
-            <div class="col-md-6 col-lg-4" data-category="beverages">
-                <div class="card same-height-card flex-card">
-                    <img src="https://media.istockphoto.com/id/1217751214/photo/fresh-mango-lassi-and-mango-fruit.webp?b=1&s=170667a&w=0&k=20&c=Jt0J70BwVkGdirVAu78hKb-MiMzN3_GUbCz8SmGUdS8=" class="card-img-top" alt="Mango Lassi">
+            <div class="col-12 col-md-6 col-lg-4 mb-4" data-category="beverages">
+                <div class="card h-100">
+                    <img src="https://media.istockphoto.com/id/1217751214/photo/fresh-mango-lassi-and-mango-fruit.webp?b=1&s=170667a&w=0&k=20&c=Jt0J70BwVkGdirVAu78hKb-MiMzN3_GUbCz8SmGUdS8=" class="card-img-top img-fluid" alt="Mango Lassi">
                     <div class="card-body">
                         <h5 class="card-title">Mango Lassi</h5>
                         <p class="card-text">Category: Beverages</p>
@@ -320,14 +386,14 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="container mt-4">
-        <div class="row">
+        
+    
+    
+        
             <!-- Card 13 -->
-            <div class="col-md-6 col-lg-4" data-category="beverages">
-                <div class="card same-height-card flex-card">
-                    <img src="https://images.unsplash.com/photo-1627435601361-ec25f5b1d0e5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Z3JlZW4lMjB0ZWF8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="Green Tea">
+            <div class="col-12 col-md-6 col-lg-4 mb-4" data-category="beverages">
+                <div class="card h-100">
+                    <img src="https://images.unsplash.com/photo-1627435601361-ec25f5b1d0e5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Z3JlZW4lMjB0ZWF8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60" class="card-img-top img-fluid" alt="Green Tea">
                     <div class="card-body">
                         <h5 class="card-title">Green Tea</h5>
                         <p class="card-text">Category: Beverages</p>
