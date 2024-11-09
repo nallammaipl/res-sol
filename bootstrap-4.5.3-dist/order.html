@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Now</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="images/Dine Divine.png" sizes="48x48" type="image/png">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background: url('https://pointos.com/wp-content/uploads/2017/10/cropped-blur-background-of-pub-restaurant-with-wood-table-628137314_2125x1416.jpeg') no-repeat center center fixed;
+        }
+        
+        .container-fluid {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        label, select, button, p {
+            margin: 10px 0;
+            width: 100%;
+        }
+        
+        label {
+            font-weight: bold;
+            color: #555;
+        }
+        
+        select, button {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+        
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        button:hover {
+            background-color: #0056b3;
+        }
+        
+        p {
+            font-size: 18px;
+            color: #555;
+            text-align: left;
+            width: 100%;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <h1>Order Your Meal</h1>
+        <form id="orderForm">
+            <p>Item: <span id="itemName"></span></p>
+            <p>Base Price: $<span id="itemPrice"></span></p>
+
+            <label for="portionSize">Portion Size:</label>
+            <select id="portionSize" name="portionSize" onchange="updateRate()">
+                <option value="small">Small</option>
+                <option value="medium">Medium</option>
+                <option value="large">Large</option>
+            </select>
+
+            <p id="rateSection">Rate: $<span id="rate"></span></p>
+
+            <button type="submit">Order Now</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Define the base prices for each item
+            const basePrices = {
+                "Tart Tatin":6.50,
+                "Soup of the day":5.00,
+                "Bruschetta":7.00,
+                "Chicken Parmesan":12.00,
+                "Steak Frites":18.00,
+                "Chocolate Lava Cake":8.00,
+                "Apple Pie":6.00,
+                "Caesar Salad":6.00,
+                "Spaghetti Carbonara":14.00,
+                "Tiramisu":7.00,
+                "Iced Coffee":4.00,
+                "Mango Lassi":5.00,
+                "Green Tea":3.00,
+                "Blueberry Basil Smoothie":5.00,
+                "Stuffed Capsicum":8.00,
+                "Banana Foster":7.00,
+                "Macaroni and Cheese":7.00,
+                "Garlic Bread":4.00,
+                "Vegetable Stir-Fry": 9.00,
+                "Lasagna Bolognese": 12.00,
+                "Pizza": 12.00,
+                "Vegan Burger": 10.00,
+                
+            };
+
+            // Get item name from URL and fetch the corresponding base price
+            const urlParams = new URLSearchParams(window.location.search);
+            const itemName = urlParams.get('item');
+            const itemPrice = basePrices[itemName];
+
+            document.getElementById("itemName").textContent = itemName;
+            document.getElementById("itemPrice").textContent = itemPrice;
+
+            // Set initial rate
+            document.getElementById("rate").textContent = itemPrice;
+
+            // Update rate based on portion size
+            window.updateRate = function() {
+                const portionSize = document.getElementById("portionSize").value;
+                let rate = itemPrice;
+
+                if (portionSize === "medium") {
+                    rate += 2.00; // Increment for medium size
+                } else if (portionSize === "large") {
+                    rate += 4.00; // Increment for large size
+                }
+
+                document.getElementById("rate").textContent = rate.toFixed(2); // Display rate with two decimal places
+            };
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const orderForm = document.getElementById("orderForm");
+            if (orderForm) {
+                orderForm.addEventListener("submit", function(event) {
+                    event.preventDefault(); // Prevent the default form submission
+
+                    const portionSize = document.getElementById("portionSize").value;
+                    const itemName = new URLSearchParams(window.location.search).get('item');
+                    const itemPrice = document.getElementById("rate").textContent;
+
+                    // Store the selected values in localStorage (or sessionStorage)
+                    localStorage.setItem("portionSize", portionSize);
+                    localStorage.setItem("itemName", itemName);
+                    localStorage.setItem("itemPrice", itemPrice);
+
+                    // Redirect to the order confirmation page
+                    window.location.href = "order-confirmation.html";
+                });
+            }
+        });
+    </script>
+</body>
+</html>
