@@ -97,6 +97,10 @@
             <p id="rateSection">Rate: $<span id="rate"></span></p>
 
             <button type="button" onclick="addToCart()">Add to Cart</button>
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" name="quantity" min="1" value="1" onchange="updateRate()">
+            <label for="tableNumber">Table Number:</label> 
+            <input type="text" id="tableNumber" name="tableNumber">
         </form>
         <h2>Your Cart</h2>
         <ul id="cartItems"></ul>
@@ -105,7 +109,7 @@
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function(){
             const basePrices = {
                 "Tart Tatin":6.50,
                 "Soup of the day":5.00,
@@ -141,6 +145,7 @@
 
             window.updateRate = function() {
                 const portionSize = document.getElementById("portionSize").value;
+                const quantity = parseInt(document.getElementById("quantity").value) || 1;
                 let rate = itemPrice;
 
                 if (portionSize === "medium") {
@@ -149,15 +154,17 @@
                     rate += 4.00;
                 }
 
-                document.getElementById("rate").textContent = rate.toFixed(2);
-            };
+                document.getElementById("rate").textContent = (rate * quantity).toFixed(2); };
+            
 
             window.addToCart = function() {
                 const portionSize = document.getElementById("portionSize").value;
+                const quantity = parseInt(document.getElementById("quantity").value) || 1;
                 const itemRate = parseFloat(document.getElementById("rate").textContent);
+                const tableNumber = document.getElementById("tableNumber").value;
 
                 const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-                cartItems.push({ itemName, portionSize, itemRate });
+                cartItems.push({ itemName, portionSize, quantity, itemRate, tableNumber });
                 localStorage.setItem("cartItems", JSON.stringify(cartItems));
 
                 updateCartDisplay();
@@ -180,8 +187,7 @@
             };
 
             window.placeOrder = function() {
-                localStorage.removeItem("cartItems");
-                alert("Order placed successfully!");
+                
                 window.location.href = "order-confirmation.html";
             };
 
