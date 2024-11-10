@@ -17,9 +17,10 @@
             height: 100vh;
             margin: 0;
             background: url('https://pointos.com/wp-content/uploads/2017/10/cropped-blur-background-of-pub-restaurant-with-wood-table-628137314_2125x1416.jpeg') no-repeat center center fixed;
+
         }
         
-        .container-fluid {
+        .container {
             background-color: #fff;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -27,23 +28,22 @@
             max-width: 400px;
             width: 100%;
             text-align: center;
-            
         }
         
-        h1 {
+        h1, h2 {
             color: #333;
             margin-bottom: 20px;
         }
         
-        form {
+        form, ul {
             display: flex;
             flex-direction: column;
             align-items: center;
+            width: 100%;
         }
         
-        label, select, button, p {
+        label, select, button, p, ul {
             margin: 10px 0;
-            width: 100%;
         }
         
         label {
@@ -69,17 +69,19 @@
             background-color: #0056b3;
         }
         
-        p {
+        p, li {
             font-size: 18px;
             color: #555;
-            text-align: left;
-            width: 100%;
+        }
+        
+        li {
+            list-style-type: none;
         }
         
     </style>
 </head>
 <body>
-    <div class="container-fluid">
+    <div class="container">
         <h1>Order Your Meal</h1>
         <form id="orderForm">
             <p>Item: <span id="itemName"></span></p>
@@ -94,13 +96,16 @@
 
             <p id="rateSection">Rate: $<span id="rate"></span></p>
 
-            <button type="submit">Order Now</button>
+            <button type="button" onclick="addToCart()">Add to Cart</button>
         </form>
+        <h2>Your Cart</h2>
+        <ul id="cartItems"></ul>
+        <p>Total: $<span id="totalRate">0.00</span></p>
+        <button id="placeOrderButton" type="button" onclick="placeOrder()">Place Order</button>
     </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            // Define the base prices for each item
             const basePrices = {
                 "Tart Tatin":6.50,
                 "Soup of the day":5.00,
@@ -126,52 +131,61 @@
                 "Vegan Burger": 10.00,
                 
             };
-
-            // Get item name from URL and fetch the corresponding base price
             const urlParams = new URLSearchParams(window.location.search);
             const itemName = urlParams.get('item');
             const itemPrice = basePrices[itemName];
 
             document.getElementById("itemName").textContent = itemName;
             document.getElementById("itemPrice").textContent = itemPrice;
-
-            // Set initial rate
             document.getElementById("rate").textContent = itemPrice;
 
-            // Update rate based on portion size
             window.updateRate = function() {
                 const portionSize = document.getElementById("portionSize").value;
                 let rate = itemPrice;
 
                 if (portionSize === "medium") {
-                    rate += 2.00; // Increment for medium size
+                    rate += 2.00;
                 } else if (portionSize === "large") {
-                    rate += 4.00; // Increment for large size
+                    rate += 4.00;
                 }
 
-                document.getElementById("rate").textContent = rate.toFixed(2); // Display rate with two decimal places
+                document.getElementById("rate").textContent = rate.toFixed(2);
             };
-        });
 
-        document.addEventListener("DOMContentLoaded", function() {
-            const orderForm = document.getElementById("orderForm");
-            if (orderForm) {
-                orderForm.addEventListener("submit", function(event) {
-                    event.preventDefault(); // Prevent the default form submission
+            window.addToCart = function() {
+                const portionSize = document.getElementById("portionSize").value;
+                const itemRate = parseFloat(document.getElementById("rate").textContent);
 
-                    const portionSize = document.getElementById("portionSize").value;
-                    const itemName = new URLSearchParams(window.location.search).get('item');
-                    const itemPrice = document.getElementById("rate").textContent;
+                const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+                cartItems.push({ itemName, portionSize, itemRate });
+                localStorage.setItem("cartItems", JSON.stringify(cartItems));
 
-                    // Store the selected values in localStorage (or sessionStorage)
-                    localStorage.setItem("portionSize", portionSize);
-                    localStorage.setItem("itemName", itemName);
-                    localStorage.setItem("itemPrice", itemPrice);
+                updateCartDisplay();
+            };
 
-                    // Redirect to the order confirmation page
-                    window.location.href = "order-confirmation.html";
+            window.updateCartDisplay = function() {
+                const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+                const cartItemsList = document.getElementById("cartItems");
+                cartItemsList.innerHTML = "";
+                let totalRate = 0;
+
+                cartItems.forEach(item => {
+                    const listItem = document.createElement("li");
+                    listItem.textContent = `${item.itemName} (${item.portionSize}): $${item.itemRate.toFixed(2)}`;
+                    cartItemsList.appendChild(listItem);
+                    totalRate += item.itemRate;
                 });
-            }
+
+                document.getElementById("totalRate").textContent = totalRate.toFixed(2);
+            };
+
+            window.placeOrder = function() {
+                localStorage.removeItem("cartItems");
+                alert("Order placed successfully!");
+                window.location.href = "order-confirmation.html";
+            };
+
+            updateCartDisplay();
         });
     </script>
 </body>
