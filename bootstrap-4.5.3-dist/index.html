@@ -11,6 +11,20 @@
 
     
     <style>
+        .restaurant-name {
+            font-family: 'Brush Script MT', cursive; /* Choose a stylish font */
+            font-size: 4em; /* Make the font size large */
+            color: #ff6347; /* Tomato color */
+            text-shadow: 2px 2px 8px #555555; /* Add a shadow for effect */
+            text-align: center; /* Center the text */
+            margin-top: 20px;
+            transition: transform 0.3s ease-in-out; /* Smooth hover transition */
+        }
+        .restaurant-name:hover {
+            transform: scale(1.1); /* Slightly increase size on hover */
+        }
+        
+        
         body{
             background: url('https://pointos.com/wp-content/uploads/2017/10/cropped-blur-background-of-pub-restaurant-with-wood-table-628137314_2125x1416.jpeg') no-repeat center center fixed;
         }
@@ -160,14 +174,16 @@ body {
 
         
 
-    </style>
+</style>
+
+   
 </head>
 <body>
     
     <!--header-->
     <div class="boxed-header" >
-        <h1>My Awesome Page!!</h1>
-        <h3>Feel your taste buds</h3> 
+        <h1 class="restaurant-name">Dine Devine</h1>
+        <h3 class="text-success">Feel your taste buds</h3> 
     </div>
     <!--navbar-->
     <div class="container-fluid">
