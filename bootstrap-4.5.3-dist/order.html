@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order Now</title>
-    <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="images/Dine Divine.png" sizes="48x48" type="image/png">
-
+    
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -17,7 +16,7 @@
             height: 100vh;
             margin: 0;
             background: url('https://pointos.com/wp-content/uploads/2017/10/cropped-blur-background-of-pub-restaurant-with-wood-table-628137314_2125x1416.jpeg') no-repeat center center fixed;
-
+            background-size: cover;
         }
         
         .container {
@@ -42,20 +41,12 @@
             width: 100%;
         }
         
-        label, select, button, p, ul {
+        label, select, button, p, ul, input[type="number"] {
             margin: 10px 0;
-        }
-        
-        label {
-            font-weight: bold;
-            color: #555;
-        }
-        
-        select, button {
             padding: 10px;
+            font-size: 16px;
             border-radius: 5px;
             border: 1px solid #ccc;
-            font-size: 16px;
         }
         
         button {
@@ -63,6 +54,7 @@
             color: #fff;
             cursor: pointer;
             transition: background-color 0.3s ease;
+            width: 100%;
         }
         
         button:hover {
@@ -77,7 +69,6 @@
         li {
             list-style-type: none;
         }
-        
     </style>
 </head>
 <body>
@@ -94,14 +85,17 @@
                 <option value="large">Large</option>
             </select>
 
-            <p id="rateSection">Rate: $<span id="rate"></span></p>
+            <p>Rate: $<span id="rate"></span></p>
 
-            <button type="button" onclick="addToCart()">Add to Cart</button>
             <label for="quantity">Quantity:</label>
             <input type="number" id="quantity" name="quantity" min="1" value="1" onchange="updateRate()">
-            <label for="tableNumber">Table Number:</label> 
+
+            <label for="tableNumber">Table Number:</label>
             <input type="text" id="tableNumber" name="tableNumber">
+
+            <button type="button" onclick="addToCart()">Add to Cart</button>
         </form>
+
         <h2>Your Cart</h2>
         <ul id="cartItems"></ul>
         <p>Total: $<span id="totalRate">0.00</span></p>
@@ -109,7 +103,7 @@
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function(){
+        document.addEventListener("DOMContentLoaded", function() {
             const basePrices = {
                 "Tart Tatin":6.50,
                 "Soup of the day":5.00,
@@ -133,66 +127,82 @@
                 "Lasagna Bolognese": 12.00,
                 "Pizza": 12.00,
                 "Vegan Burger": 10.00,
-                
             };
+        
             const urlParams = new URLSearchParams(window.location.search);
             const itemName = urlParams.get('item');
-            const itemPrice = basePrices[itemName];
-
+            const itemPrice = basePrices[itemName] || 0;
+        
             document.getElementById("itemName").textContent = itemName;
-            document.getElementById("itemPrice").textContent = itemPrice;
-            document.getElementById("rate").textContent = itemPrice;
-
+            document.getElementById("itemPrice").textContent = itemPrice.toFixed(2);
+            document.getElementById("rate").textContent = itemPrice.toFixed(2);
+        
             window.updateRate = function() {
                 const portionSize = document.getElementById("portionSize").value;
                 const quantity = parseInt(document.getElementById("quantity").value) || 1;
                 let rate = itemPrice;
-
+        
                 if (portionSize === "medium") {
                     rate += 2.00;
                 } else if (portionSize === "large") {
                     rate += 4.00;
                 }
-
-                document.getElementById("rate").textContent = (rate * quantity).toFixed(2); };
-            
-
+        
+                document.getElementById("rate").textContent = (rate * quantity).toFixed(2);
+            };
+        
             window.addToCart = function() {
-                const portionSize = document.getElementById("portionSize").value;
-                const quantity = parseInt(document.getElementById("quantity").value) || 1;
-                const itemRate = parseFloat(document.getElementById("rate").textContent);
+                const quantity = parseInt(document.getElementById("quantity").value);
                 const tableNumber = document.getElementById("tableNumber").value;
-
-                const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-                cartItems.push({ itemName, portionSize, quantity, itemRate, tableNumber });
-                localStorage.setItem("cartItems", JSON.stringify(cartItems));
-
+                const rate = parseFloat(document.getElementById("rate").textContent);
+                const order = { itemName, quantity, rate, tableNumber };
+        
+                const cartItems = JSON.parse(sessionStorage.getItem("cartItems")) || [];
+                cartItems.push(order);
+                sessionStorage.setItem("cartItems", JSON.stringify(cartItems));
+                //sessionStorage.setItem("tableNumber", tableNumber);
                 updateCartDisplay();
             };
-
+        
             window.updateCartDisplay = function() {
-                const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+                const cartItems = JSON.parse(sessionStorage.getItem("cartItems")) || [];
                 const cartItemsList = document.getElementById("cartItems");
                 cartItemsList.innerHTML = "";
+        
                 let totalRate = 0;
-
+        
                 cartItems.forEach(item => {
                     const listItem = document.createElement("li");
-                    listItem.textContent = `${item.itemName} (${item.portionSize}): $${item.itemRate.toFixed(2)}`;
+                    listItem.textContent = `${item.itemName} x${item.quantity}: $${item.rate.toFixed(2)}`;
                     cartItemsList.appendChild(listItem);
-                    totalRate += item.itemRate;
+                    totalRate += item.rate;
                 });
-
+        
                 document.getElementById("totalRate").textContent = totalRate.toFixed(2);
             };
-
-            window.placeOrder = function() {
+        
+            window.placeOrder=function() {
+                const cartItems = JSON.parse(sessionStorage.getItem("cartItems")) || [];
+                if (cartItems.length === 0) {
+                    alert("Your cart is empty. Please add items before placing the order.");
+                    return;
+                }
                 
+                // Store the order in `sessionStorage` for the confirmation page
+                sessionStorage.setItem("placedOrder", JSON.stringify(cartItems));
+                
+                // Store the order in `localStorage` for staff access
+                let allOrders = JSON.parse(localStorage.getItem("allOrders")) || [];
+                allOrders.push(cartItems);  // Add the new order to all orders
+                localStorage.setItem("allOrders", JSON.stringify(allOrders));
+            
+                // Clear the cart and navigate to the confirmation page
+                sessionStorage.removeItem("cartItems");
                 window.location.href = "order-confirmation.html";
-            };
-
-            updateCartDisplay();
-        });
+            }
+            
+        });   
+        
     </script>
 </body>
 </html>

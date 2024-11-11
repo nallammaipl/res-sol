@@ -675,55 +675,12 @@ body {
    
     
     
-    <script>
-        // Function to filter cards
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault(); // Prevent the default link behavior
-                const category = this.getAttribute('data-category');
-    
-                // Remove 'active' class from all links
-                document.querySelectorAll('.nav-link').forEach(nav => nav.classList.remove('active'));
-                // Add 'active' class to the clicked link
-                this.classList.add('active');
-    
-                // Show/Hide cards based on the selected category
-                document.querySelectorAll('.col-md-6, .col-lg-4').forEach(card => {
-                    if (category === 'all' || card.getAttribute('data-category') === category) {
-                        card.style.display = 'block'; // Show card
-                    } else {
-                        card.style.display = 'none'; // Hide card
-                    }
-                });
-    
-                const row = document.querySelector('.row');
-                row.style.display = 'flex'; // Ensure row is a flex container
-                row.style.flexWrap = 'wrap';
-            });
-        });
-    </script>
-    <script>
-        // Function to search cards
-        document.getElementById('searchInput').addEventListener('input', function() {
-            const searchTerm = this.value.toLowerCase();
-    
-            // Get all the cards
-            document.querySelectorAll('.col-md-6, .col-lg-4').forEach(card => {
-                const title = card.querySelector('.card-title').textContent.toLowerCase();
-    
-                // Check if the title includes the search term
-                if (title.includes(searchTerm)) {
-                    card.style.display = 'block'; // Show the card
-                } else {
-                    card.style.display = 'none'; // Hide the card
-                }
-            });
-        });
-    </script>
     
     
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="js/bootstrap.js"></script>
+    <script src="app.js"></script>
+
     
 </body>
 </html>

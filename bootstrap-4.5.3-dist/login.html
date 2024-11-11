@@ -94,7 +94,7 @@
     </style>
 </head>
 <body>
-<<<<<<< HEAD
+
     <div class="login-container">
         <h1>Login</h1>
         <form id="loginForm">
@@ -108,52 +108,13 @@
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
             <button type="button" onclick="validateLogin()">Login</button>
-=======
-    <div class="account-container">
-        <h2>Create Account</h2>
-        <form id="accountForm">
-            <div class="input-group">
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username" required>
-            </div>
-            <div class="input-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div class="input-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <div class="input-group">
-                <label for="confirmPassword">Confirm Password</label>
-                <input type="password" id="confirmPassword" name="confirmPassword" required>
-            </div>
-            
-            
 
-        
-            <button type="submit">Create Account</button>
-            <p id="message"></p>
->>>>>>> 2f06fb31eacdab637e4a00545def98c727bd9b8e
+    
+
         </form>
         <p id="errorMessage" class="error-message"></p>
     </div>
-
-    <script>
-        function validateLogin() {
-            const userType = document.getElementById("userType").value;
-            const password = document.getElementById("password").value;
-            const userPassword = "21"; // User password
-            const staffPassword = "1234"; // Staff password
-
-            if (userType === "user" && password === userPassword) {
-                window.location.href = "index.html"; // Redirect users to index page
-            } else if (userType === "staff" && password === staffPassword) {
-                window.location.href = "staff.html"; // Redirect staff to staff page
-            } else {
-                document.getElementById("errorMessage").textContent = "Incorrect user type or password. Please try again.";
-            }
-        }
-    </script>
+    <script src="app.js"></script>
+    
 </body>
 </html>
