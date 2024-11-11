@@ -1,0 +1,32 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "*.html",
+        "use": "@vercel/static"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/login",
+        "dest": "/login.html"
+      },
+      {
+        "src": "/index",
+        "dest": "/index.html"
+      },
+      {
+        "src": "/order",
+        "dest": "/order.html"
+      },
+      {
+        "src": "/order-confirmation",
+        "dest": "/order-confirmation.html"
+      },
+      {
+        "src": "/staff",
+        "dest": "/staff.html"
+      }
+    ]
+  }
+  
